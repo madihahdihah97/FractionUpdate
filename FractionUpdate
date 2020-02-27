@@ -1,0 +1,222 @@
+main.dart//flutter
+import 'package:flutter/material.dart';
+import 'package:hello_fractioncal/calculation.java';
+
+void main() => runApp(MyApp());
+
+class Operator{
+const Operator(this.symbol);
+final String symbol;
+}
+ 
+class MyApp extends StatefulWidget {
+@override
+_MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+Operator selectedSymbol;
+List <Operator> operators = <Operator>[const Operator(‘+’), const Operator(‘-’), const Operator(‘x’), const Operator(‘/’)]; 
+final TextEditingController _noOneController = TextEditingController();
+final TextEditingController _noTwoController = TextEditingController();
+final TextEditingController _noThreeController = TextEditingController();
+final TextEditingController _noFourController = TextEditingController();
+//final TextEditingController _resultController = TextEditingController();
+int _no1 = 0, _no2 = 0, _no3 = 0, _no4 = 0;
+double _result = 0.0;
+Calculation calc = new Calculation();
+
+@override
+Widget build(BuildContext context) {
+	return MaterialApp(
+		title: 'Material App',
+		theme: ThemeData.dark(),
+		home: Scaffold(
+			resizeToAvoidBottomPadding: false,
+			appBar: AppBar(
+			title: Text('FRACTION CALCULATOR'),
+			), //AppBar
+		body: Center(
+			child: Column(
+				children: <Widget>[
+					Padding(
+						padding: EdgeInsets.fromLTRB(50, 10, 50, 0),
+						child: Text("Hello World!", style: TextStyle(fontSize:15)), //Text
+					), //Padding
+
+Padding(
+		padding: EdgeInsets.fromLTRB(50, 10, 50, 0),
+		child: Text("Welcome To Simple Calculator",
+		style: TextStyle(fontSize: 15)), //Text
+	), //Padding
+
+	Padding(
+		padding: EdgeInsets.fromLTRB(50, 10, 50, 0),
+		child: Text("Fraction Calculator!",
+		style: TextStyle(fontSize: 17)),//Text
+	), //Padding
+
+	Padding(
+		padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+		child: new Divider(
+			height: 18.0,
+			color: Color.fromRGBO(237, 194, 52, 1),
+		), //Divider
+	), //Padding
+
+Row(
+		children: <Widget>[
+			Padding(
+				padding: EdgeInsets.fromLTRB(10, 5, 10, 0),
+				child: Text( "INSTRUCTION:",
+						style: TextStyle(fontSize: 14),
+						textAlign: TextAlign.left,
+				), //Text
+			), //Padding
+		], //Widget
+	), //Row
+
+	Row(
+		children: <Widget>[
+			Padding(
+				padding: EdgeInsets.fromLTRB(10, 5, 10, 0),
+				child: Text( "Put the data inside the box, then click calculate to get the answer.",
+					style: TextStyle(fontSize:16),
+					textAlign: TextAlign.left,
+				), //Text
+			), //Padding
+		], //Widget
+	), //Row //can I exclude the row and use padding only? Let’s try
+
+Row(
+child: new Column(
+children:<Widget>[
+Padding(
+padding: EdgeInsets.all(5),
+child: TextField(
+controller: _noOneController;
+height: ,
+width: ,
+) //Textfield
+) //Padding
+
+Padding(
+		padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+		child: new Divider(
+			height: 18.0,
+			color: Color.fromRGBO(237, 194, 52, 1),
+		), //Divider
+	), //Padding
+
+Padding(
+padding: EdgeInsets.all(5),
+child: TextField(
+controller: _noOneController;
+height: ,
+width: ,
+) //Textfield
+) //Padding
+
+], //Widget
+) //Column
+
+), //Row
+
+DropdownButton<Operator>(
+value: selectedSymbol,
+onChanged: (Operator newValue){
+setState((){
+selectedSymbol = newValue;
+}); //setState
+}, //onChanged
+items: operators.map((Operator op){
+return new DropdownMenuItem<Operation>(
+value:op;
+child: new Text(
+op.symbol,
+style: new TextStyle(color: Colors.black),
+), //Text
+); //return
+}).toList() //items
+) //Dropdown
+]//Widget ) //Column ) //Center ),//Scaffold
+); //MaterialApp
+
+//method for button _onPress(calculate button) (call calculate method??, check for the input.)
+void _onPress(){
+setState((){
+_no1 = int.parse(_noOneController.text);
+_no2 = int.parse(_noTwoController.text);
+_no3 = int.parse(_noThreeController.text);
+_no4 = int.parse(_noFourController.text);
+result = calc.Calculate(_no1,_no2,_no3,_no4,operator);
+});
+}
+
+//method for clear button
+ void _onPress1(){
+setState((){
+_noOneController.text = “ ”;
+_noTwoController.text = “ ”;
+_noThreeController.text = “ ”;
+_noFourController.text = “ ”;
+//result = “ ”;
+});
+}
+
+//method for calculate (do operation for calculating the fraction, use if else)
+//plus(…)
+//substract(…)
+//multiply(…)
+//divide(…)
+}
+}
+
+
+class calculation//
+public class Calculation {
+	int a, int b, int c, int d;
+	string operator;
+	double result;
+
+public void Calculation(){}
+
+	public void Calculation (a,b,c,d,operator){
+		this.a = a;
+		this.b = b;
+		this.c = c;
+		this.d = d;
+		this.operator = operator;
+	}
+
+	public static void Plus(int num1,int num2,int num3,int num4){
+		result = (num1/num2) + (num3/num4);
+	}
+
+	public static void Substract(int num1,int num2,int num3,int num4){
+		result = (num1/num2) - (num3/num4);
+	}
+
+	public static void Multiply(int num1,int num2,int num3,int num4){
+		result = (num1/num2) * (num3/num4);
+	}
+
+	public static void Divide(int num1,int num2,int num3,int num4){
+		result = (num1/num2) / (num3/num4);
+	}
+
+	public void Double Calculate(int n1, int n2, int n3, int n4, string operator){
+		if (operator.isEqualTo("+")){
+			result = Plus(n1,n2,n3,n4);
+		} else if (operator.isEqualTo("-")){
+			result = Substract(n1,n2,n3,n4);
+		} else if (operator.isEqualTo("*")){
+			result = Multiply(n1,n2,n3,n4);
+		} else {
+			result = Divide(n1,n2,n3,n4);
+		}
+		return result;
+	}
+}
+
+
